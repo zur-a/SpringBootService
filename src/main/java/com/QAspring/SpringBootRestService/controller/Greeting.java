@@ -1,5 +1,8 @@
 package com.QAspring.SpringBootRestService.controller;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Greeting {
 	private long id;
 	private String content;
