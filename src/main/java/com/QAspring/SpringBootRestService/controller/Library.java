@@ -1,13 +1,21 @@
 package com.QAspring.SpringBootRestService.controller;
 
-import org.springframework.stereotype.Component;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
-@Component
+@Entity
+@Table(name="Library")
 public class Library {
+	@Column(name="id")
 	private String id;
+	@Column(name="book_name")
 	private String book_name;
+	@Column(name="isbn")
 	private String isbn;
+	@Column(name="aisle")
 	private int aisle;
+	@Column(name="author")
 	private String author;
 	
 	public String getId() {
