@@ -2,11 +2,13 @@ package com.QAspring.SpringBootRestService.controller;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="Library")
 public class Library {
+	@Id
 	@Column(name="id")
 	private String id;
 	@Column(name="book_name")
