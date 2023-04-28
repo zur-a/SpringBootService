@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.QAspring.SpringBootRestService.repository.LibraryRepository;
+import com.QAspring.SpringBootRestService.service.LibraryService;
 
 @RestController
 public class LibraryController {
@@ -18,11 +19,16 @@ public class LibraryController {
 	@Autowired
 	AddResponse response;
 	
+	@Autowired
+	LibraryService libraryService;
+	
 	@PostMapping("/addBook")
 	public ResponseEntity<AddResponse> addBookImplementation(@RequestBody Library library) {
-		//Defining logic to create the book id
-		String id = library.getIsbn() + library.getAisle();
-		library.setId(id);
+		//Retrieving book id
+		String id = libraryService.idBuilder(library.getIsbn(), library.getAisle());
+		
+		//Checking if book is already represented in the database
+		libraryService.checkBookExists(id);
 		
 		//Add book data to database table
 		repository.save(library);
