@@ -28,20 +28,33 @@ public class LibraryController {
 		String id = libraryService.idBuilder(library.getIsbn(), library.getAisle());
 		
 		//Checking if book is already represented in the database
-		libraryService.checkBookExists(id);
-		
-		//Add book data to database table
-		repository.save(library);
-		
-		//Add successful message
-		response.setMessage("Book is succesfully added");
-		response.setId(id);
-		
-		//Creating headers for the response
-		HttpHeaders header = new HttpHeaders();
-		header.add("Unique", id);
-		
-		//Returns response in json format
-		return new ResponseEntity<AddResponse>(response, header, HttpStatus.CREATED);
+		if(!libraryService.checkBookExists(id)) {
+			//Sets the id for the book
+			library.setId(id);
+			
+			//Add book data to database table
+			repository.save(library);
+			
+			//Add successful message
+			response.setMessage("Book is succesfully added");
+			response.setId(id);
+			
+			//Creating headers for the response
+			HttpHeaders header = new HttpHeaders();
+			header.add("Unique", id);
+			
+			//Returns response in json format
+			return new ResponseEntity<AddResponse>(response, header, HttpStatus.CREATED);
+			
+		} else {
+			//Returns message "Book is already represented in the database" with status code 202
+			
+			//Adding message to the response
+			response.setMessage("Book is already represented in the database");
+			response.setId(id);
+			
+			//Returns response in json format
+			return new ResponseEntity<AddResponse>(response, HttpStatus.ACCEPTED);
+		}
 	}
 }
