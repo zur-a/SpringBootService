@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +25,7 @@ public class LibraryController {
 	LibraryService libraryService;
 	
 	@PostMapping("/addBook")
-	public ResponseEntity<AddResponse> addBookImplementation(@RequestBody Library library) {
+	public ResponseEntity<AddResponse> addBook(@RequestBody Library library) {
 		//Retrieving book id
 		String id = libraryService.idBuilder(library.getIsbn(), library.getAisle());
 		
@@ -57,4 +59,10 @@ public class LibraryController {
 			return new ResponseEntity<AddResponse>(response, HttpStatus.ACCEPTED);
 		}
 	}
+	
+	@GetMapping("/getBook/{id}")
+	public void getBookById(@PathVariable(value="id") String id) {
+		
+	}
+	
 }
