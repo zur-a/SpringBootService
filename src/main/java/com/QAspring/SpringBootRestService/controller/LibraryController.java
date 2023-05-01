@@ -1,5 +1,7 @@
 package com.QAspring.SpringBootRestService.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -73,8 +75,8 @@ public class LibraryController {
 	}
 	
 	@GetMapping("/getBook/author")
-	public Library getBookByAuthor(@RequestParam(value="name") String author) {
-		return null;
+	public List<Library> getBookByAuthor(@RequestParam(value="name") String author) {
+		return repository.findAllByAuthor(author);
 	}
 	
 }
