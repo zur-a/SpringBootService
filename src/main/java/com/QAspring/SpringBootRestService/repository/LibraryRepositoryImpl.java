@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.QAspring.SpringBootRestService.controller.Library;
 
-public class LibraryRepositoryImplementation implements LibraryRepositoryCustom {
+public class LibraryRepositoryImpl implements LibraryRepositoryCustom {
 	
 	@Autowired
 	LibraryRepository repository;
@@ -17,10 +17,9 @@ public class LibraryRepositoryImplementation implements LibraryRepositoryCustom 
 		List<Library> books = repository.findAll();
 		List<Library> authorBooks = new ArrayList<Library>();
 		
-		for (int i = 0; i < books.size(); i++) {
-			if(books.get(i).getAuthor().equalsIgnoreCase("Goethe")) {
-				System.out.println(books.get(i).getAuthor().equalsIgnoreCase("Goethe"));
-				authorBooks.add(books.get(i));
+		for (Library book : books) {
+			if (book.getAuthor().equalsIgnoreCase(author)) {
+				authorBooks.add(book);
 			}
 		}
 		return authorBooks;
