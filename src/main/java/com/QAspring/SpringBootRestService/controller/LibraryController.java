@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.QAspring.SpringBootRestService.repository.LibraryRepository;
 import com.QAspring.SpringBootRestService.service.LibraryService;
@@ -62,8 +63,11 @@ public class LibraryController {
 	
 	@GetMapping("/getBook/{id}")
 	public Library getBookById(@PathVariable(value="id") String id) {
-		Library library = repository.findById(id).get();
-		return library;
+		try {
+			Library library = repository.findById(id).get();
+			return library;
+		} catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
 	}
-	
 }
