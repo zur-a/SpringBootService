@@ -61,8 +61,9 @@ public class LibraryController {
 	}
 	
 	@GetMapping("/getBook/{id}")
-	public void getBookById(@PathVariable(value="id") String id) {
-		
+	public Library getBookById(@PathVariable(value="id") String id) {
+		Library library = repository.findById(id).get();
+		return library;
 	}
 	
 }
