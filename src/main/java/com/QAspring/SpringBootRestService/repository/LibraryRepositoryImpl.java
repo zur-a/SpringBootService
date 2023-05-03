@@ -2,9 +2,6 @@ package com.QAspring.SpringBootRestService.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.QAspring.SpringBootRestService.controller.Library;
 
 public class LibraryRepositoryImpl implements LibraryRepositoryCustom {
