@@ -9,16 +9,15 @@ import com.QAspring.SpringBootRestService.controller.Library;
 
 public class LibraryRepositoryImpl implements LibraryRepositoryCustom {
 	
-	@Autowired
-	LibraryRepository repository;
+	//@Autowired
+	//LibraryRepository repository;
 	
 	@Override
-	public List<Library> findAllByAuthor(String author) {
+	public List<Library> findAllByAuthor(String authorName, LibraryRepository repository) {
 		List<Library> books = repository.findAll();
 		List<Library> authorBooks = new ArrayList<Library>();
-		
 		for (Library book : books) {
-			if (book.getAuthor().equalsIgnoreCase(author)) {
+			if (book.getAuthor().equalsIgnoreCase(authorName)) {
 				authorBooks.add(book);
 			}
 		}

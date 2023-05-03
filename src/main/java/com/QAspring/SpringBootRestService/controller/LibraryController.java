@@ -19,6 +19,7 @@ import com.QAspring.SpringBootRestService.service.LibraryService;
 
 @RestController
 public class LibraryController {
+	
 	@Autowired
 	LibraryRepository repository;
 	
@@ -75,8 +76,8 @@ public class LibraryController {
 	}
 	
 	@GetMapping("/getBook/author")
-	public List<Library> getBookByAuthor(@RequestParam(value="name") String author) {
-		return repository.findAllByAuthor(author);
+	public List<Library> getBookByAuthor(@RequestParam(value="authorName")String authorName) {
+		return repository.findAllByAuthor(authorName, repository);
 	}
 	
 }
