@@ -3,6 +3,9 @@ package com.QAspring.SpringBootRestService.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.QAspring.SpringBootRestService.controller.Book;
 
 public class BookRepositoryImpl implements BookRepositoryCustom {
@@ -24,13 +27,13 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 
 	@Override
 	public Book findByTitle(String title, BookRepository repository) {
-		List<Book> books = repository.findAll();
-		for (Book book : books) {
-			if (book.getTitle().equalsIgnoreCase(title)) {
-				return book;
-			}
-		}
-		return new Book();
+	    List<Book> books = repository.findAll();
+	    for (Book book : books) {
+	        if (book.getTitle().equalsIgnoreCase(title)) {
+	            return book;
+	        }
+	    }
+	    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
 	}
 
 }
