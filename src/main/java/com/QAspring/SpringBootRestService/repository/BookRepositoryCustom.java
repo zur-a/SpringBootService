@@ -5,4 +5,5 @@ import com.QAspring.SpringBootRestService.controller.Book;
 
 public interface BookRepositoryCustom {
 	List<Book> findAllByAuthor(String author, BookRepository repository);
+	Book findByTitle(String author, BookRepository repository);
 }

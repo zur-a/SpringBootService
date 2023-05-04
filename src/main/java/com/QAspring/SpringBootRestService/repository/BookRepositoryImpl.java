@@ -2,6 +2,7 @@ package com.QAspring.SpringBootRestService.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.QAspring.SpringBootRestService.controller.Book;
 
 public class BookRepositoryImpl implements BookRepositoryCustom {
@@ -19,6 +20,17 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 			}
 		}
 		return authorBooks;
+	}
+
+	@Override
+	public Book findByTitle(String title, BookRepository repository) {
+		List<Book> books = repository.findAll();
+		for (Book book : books) {
+			if (book.getTitle().equalsIgnoreCase(title)) {
+				return book;
+			}
+		}
+		return new Book();
 	}
 
 }

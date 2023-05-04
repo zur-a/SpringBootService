@@ -81,6 +81,11 @@ public class BookController {
 		return repository.findAllByAuthor(authorName, repository);
 	}
 	
+	@GetMapping("/getBook/title")
+	public Book getBookByTitle(@RequestParam(value="bookTitle")String bookTitle) {
+		return repository.findByTitle(bookTitle, repository);
+	}
+	
 	@PutMapping("/updateBook/{id}")
 	public void bookUpdate(@PathVariable(value="id") String id, @RequestBody Book newData) {
 		//Finds the book to be updated
