@@ -31,7 +31,7 @@ public class LibraryController {
 	LibraryService libraryService;
 	
 	@PostMapping("/addBook")
-	public ResponseEntity<AddResponse> addBook(@RequestBody Library library) {
+	public ResponseEntity<AddResponse> addBook(@RequestBody Book library) {
 		//Retrieving book id
 		String id = libraryService.idBuilder(library.getIsbn(), library.getAisle());
 		
@@ -67,9 +67,9 @@ public class LibraryController {
 	}
 	
 	@GetMapping("/getBook/{id}")
-	public Library getBookById(@PathVariable(value="id") String id) {
+	public Book getBookById(@PathVariable(value="id") String id) {
 		try {
-			Library library = repository.findById(id).get();
+			Book library = repository.findById(id).get();
 			return library;
 		} catch(Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -77,13 +77,22 @@ public class LibraryController {
 	}
 	
 	@GetMapping("/getBook/author")
-	public List<Library> getBookByAuthor(@RequestParam(value="authorName")String authorName) {
+	public List<Book> getBookByAuthor(@RequestParam(value="authorName")String authorName) {
 		return repository.findAllByAuthor(authorName, repository);
 	}
 	
 	@PutMapping("/updateBook/{id}")
-	public void bookUpdate(@PathVariable(value="id") String id) {
+	public void bookUpdate(@PathVariable(value="id") String id, @RequestBody Book newData) {
+		//Finds the book to be updated
+		Book bookToBeUpdated = repository.findById(id).get();
 		
+		//Setting the new values to the existing book
+		bookToBeUpdated.setAisle(newData.getAisle());
+		bookToBeUpdated.setAuthor(newData.getAuthor());
+		bookToBeUpdated.setTitle(newData.getTitle());
+		
+		//Sending the new details to update the table in the database
+		repository.save(bookToBeUpdated);
 	}
 	
 }

@@ -7,12 +7,12 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="Storage")
-public class Library {
+public class Book {
 	@Id
 	@Column(name="id")
 	private String id;
-	@Column(name="book_name")
-	private String book_name;
+	@Column(name="title")
+	private String title;
 	@Column(name="isbn")
 	private String isbn;
 	@Column(name="aisle")
@@ -28,12 +28,12 @@ public class Library {
 		this.id = id;
 	}
 	
-	public String getBook_name() {
-		return book_name;
+	public String getTitle() {
+		return title;
 	}
 	
-	public void setBook_name(String book_name) {
-		this.book_name = book_name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	public String getIsbn() {
