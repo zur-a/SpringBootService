@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import com.QAspring.SpringBootRestService.controller.Book;
 
-public class LibraryRepositoryImpl implements LibraryRepositoryCustom {
+public class BookRepositoryImpl implements BookRepositoryCustom {
 	
 	//@Autowired
 	//LibraryRepository repository;
 	
 	@Override
-	public List<Book> findAllByAuthor(String authorName, LibraryRepository repository) {
+	public List<Book> findAllByAuthor(String authorName, BookRepository repository) {
 		List<Book> books = repository.findAll();
 		List<Book> authorBooks = new ArrayList<Book>();
 		for (Book book : books) {

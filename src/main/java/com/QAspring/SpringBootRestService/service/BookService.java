@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.QAspring.SpringBootRestService.controller.Book;
-import com.QAspring.SpringBootRestService.repository.LibraryRepository;
+import com.QAspring.SpringBootRestService.repository.BookRepository;
 
 @Service
-public class LibraryService {
+public class BookService {
 	@Autowired
-	LibraryRepository repository;
+	BookRepository repository;
 	
 	public String idBuilder(String isbn, int aisle) {
 		return isbn + aisle;

@@ -15,20 +15,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.QAspring.SpringBootRestService.repository.LibraryRepository;
-import com.QAspring.SpringBootRestService.service.LibraryService;
+import com.QAspring.SpringBootRestService.repository.BookRepository;
+import com.QAspring.SpringBootRestService.service.BookService;
 
 @RestController
-public class LibraryController {
+public class BookController {
 	
 	@Autowired
-	LibraryRepository repository;
+	BookRepository repository;
 	
 	@Autowired
 	AddResponse response;
 	
 	@Autowired
-	LibraryService libraryService;
+	BookService libraryService;
 	
 	@PostMapping("/addBook")
 	public ResponseEntity<AddResponse> addBook(@RequestBody Book library) {
