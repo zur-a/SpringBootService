@@ -26,3 +26,10 @@
 2023-05-11T17:35:02.016-03:00  INFO 17700 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 2023-05-11T17:35:22.310-03:00  INFO 17700 --- [http-nio-8080-exec-3] c.Q.S.controller.BookController          : Creating a new book in the database
 2023-05-11T17:35:26.054-03:00  INFO 17700 --- [http-nio-8080-exec-4] c.Q.S.controller.BookController          : Book deleted from the database
+2023-05-11T17:35:32.502-03:00  INFO 17700 --- [http-nio-8080-exec-5] c.Q.S.controller.BookController          : Creating a new book in the database
+2023-05-11T17:50:36.485-03:00  INFO 17700 --- [RMI TCP Connection(19)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-11T17:50:36.490-03:00  INFO 17700 --- [RMI TCP Connection(19)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-05-11T17:50:36.491-03:00  INFO 17700 --- [RMI TCP Connection(19)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-11T17:50:36.496-03:00  INFO 17700 --- [RMI TCP Connection(19)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T17:50:36.498-03:00  INFO 17700 --- [RMI TCP Connection(19)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-11T17:50:36.502-03:00  INFO 17700 --- [RMI TCP Connection(19)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
