@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -101,6 +102,23 @@ public class BookController {
 		
 		//Returning a Http status code as feedback
 		return new ResponseEntity<Book>(bookToBeUpdated, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/deleteBook")
+	public ResponseEntity<String> deleteBookById(@RequestBody Book book) {
+		try {
+			//Finding the book by id
+			Book bookToBeDeleted = repository.findById(book.getId()).get();
+			
+			//Deleting the book from the database
+			repository.delete(bookToBeDeleted);
+	
+		} catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+		
+		//Returning the feedback if the book is deleted
+		return new ResponseEntity<>("The book has been deleted", HttpStatus.CREATED);
 	}
 	
 }
