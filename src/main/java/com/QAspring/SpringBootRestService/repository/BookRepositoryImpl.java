@@ -35,5 +35,4 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 	    }
 	    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
 	}
-
 }

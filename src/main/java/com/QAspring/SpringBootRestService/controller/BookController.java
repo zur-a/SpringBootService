@@ -87,7 +87,7 @@ public class BookController {
 	}
 	
 	@PutMapping("/updateBook/{id}")
-	public void bookUpdate(@PathVariable(value="id") String id, @RequestBody Book newData) {
+	public ResponseEntity<Book> bookUpdate(@PathVariable(value="id") String id, @RequestBody Book newData) {
 		//Finds the book to be updated
 		Book bookToBeUpdated = repository.findById(id).get();
 		
@@ -98,6 +98,9 @@ public class BookController {
 		
 		//Sending the new details to update the table in the database
 		repository.save(bookToBeUpdated);
+		
+		//Returning a Http status code as feedback
+		return new ResponseEntity<Book>(bookToBeUpdated, HttpStatus.OK);
 	}
 	
 }
