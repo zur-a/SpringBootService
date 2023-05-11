@@ -2,6 +2,8 @@ package com.QAspring.SpringBootRestService.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,6 +33,9 @@ public class BookController {
 	@Autowired
 	BookService libraryService;
 	
+	//Keeps track of log information
+	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+	
 	@PostMapping("/addBook")
 	public ResponseEntity<AddResponse> addBook(@RequestBody Book library) {
 		//Retrieving book id
@@ -38,6 +43,9 @@ public class BookController {
 		
 		//Checking if book is already represented in the database
 		if(!libraryService.checkBookExists(id)) {
+			//Registering in the log
+			logger.info("Creating a new book in the database");
+			
 			//Sets the id for the book
 			library.setId(id);
 			
@@ -57,6 +65,9 @@ public class BookController {
 			
 		} else {
 			//Returns message "Book is already represented in the database" with status code 202
+			
+			//Registering in the log
+			logger.info("Book already exists in the database");
 			
 			//Adding message to the response
 			response.setMessage("Book is already represented in the database");
@@ -100,6 +111,9 @@ public class BookController {
 		//Sending the new details to update the table in the database
 		repository.save(bookToBeUpdated);
 		
+		//Registering in the log
+		logger.info("Book updated in the database");
+		
 		//Returning a Http status code as feedback
 		return new ResponseEntity<Book>(bookToBeUpdated, HttpStatus.OK);
 	}
@@ -112,13 +126,15 @@ public class BookController {
 			
 			//Deleting the book from the database
 			repository.delete(bookToBeDeleted);
-	
+			
+			//Registering in the log
+			logger.info("Book deleted from the database");
+			
+			//Returning the feedback if the book is deleted
+			return new ResponseEntity<>("The book has been deleted", HttpStatus.CREATED);
 		} catch(Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		
-		//Returning the feedback if the book is deleted
-		return new ResponseEntity<>("The book has been deleted", HttpStatus.CREATED);
 	}
 	
 }
