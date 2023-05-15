@@ -18,7 +18,7 @@ public class BookService {
 	}
 	
 	public boolean checkBookExists(String id) {
-		Optional<Book> library = repository.findById(id);
-		return library.isPresent() ? true : false;
+		Optional<Book> book = repository.findById(id);
+		return book.isPresent() ? true : false;
 	}
 }

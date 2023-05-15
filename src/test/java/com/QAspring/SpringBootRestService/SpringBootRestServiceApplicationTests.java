@@ -18,9 +18,13 @@ class SpringBootRestServiceApplicationTests {
 	void contextLoads() {
 	}
 	
+	//BookService methods
+	
 	@Test
 	public void checkBuildId() {
 		assertEquals("978-85-4400-000-714", bookservice.idBuilder("978-85-4400-000-7", 14));
 	}
+	
+	
 
 }
