@@ -10,8 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.QAspring.SpringBootRestService.controller.AddResponse;
 import com.QAspring.SpringBootRestService.controller.Book;
 import com.QAspring.SpringBootRestService.controller.BookController;
 import com.QAspring.SpringBootRestService.repository.BookRepository;
@@ -71,8 +73,24 @@ class SpringBootRestServiceApplicationTests {
 		
 		//Mocking dependencies
 		when(service.idBuilder(book.getIsbn(), book.getAisle())).thenReturn(book.getIsbn() + book.getAisle());
+		when(service.checkBookExists(book.getId())).thenReturn(false);
 		
-		ResponseEntity response = controller.addBook(buildBook());
+		ResponseEntity<AddResponse> response = controller.addBook(buildBook());
+		
+		assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+	}
+	
+	@Test
+	public void bookAlreadyAdded() {
+		Book book = buildBook();
+		
+		//Mocking dependencies
+		when(service.idBuilder(book.getIsbn(), book.getAisle())).thenReturn(book.getIsbn() + book.getAisle());
+		when(service.checkBookExists(book.getId())).thenReturn(true);
+		
+		ResponseEntity<AddResponse> response = controller.addBook(buildBook());
+		
+		assertEquals(response.getStatusCode(), HttpStatus.ACCEPTED);
 	}
 
 }
