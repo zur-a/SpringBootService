@@ -31,26 +31,26 @@ public class BookController {
 	AddResponse response;
 	
 	@Autowired
-	BookService libraryService;
+	BookService service;
 	
 	//Keeps track of log information
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	
 	@PostMapping("/addBook")
-	public ResponseEntity<AddResponse> addBook(@RequestBody Book library) {
+	public ResponseEntity<AddResponse> addBook(@RequestBody Book book) {
 		//Retrieving book id
-		String id = libraryService.idBuilder(library.getIsbn(), library.getAisle());
+		String id = service.idBuilder(book.getIsbn(), book.getAisle());
 		
 		//Checking if book is already represented in the database
-		if(!libraryService.checkBookExists(id)) {
+		if(!service.checkBookExists(id)) {
 			//Registering in the log
 			logger.info("Creating a new book in the database");
 			
 			//Sets the id for the book
-			library.setId(id);
+			book.setId(id);
 			
 			//Add book data to database table
-			repository.save(library);
+			repository.save(book);
 			
 			//Add successful message
 			response.setMessage("Book is succesfully added");
