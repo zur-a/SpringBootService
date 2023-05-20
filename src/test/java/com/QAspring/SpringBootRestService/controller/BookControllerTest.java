@@ -1,19 +1,27 @@
 package com.QAspring.SpringBootRestService.controller;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
 
 import com.QAspring.SpringBootRestService.repository.BookRepository;
 import com.QAspring.SpringBootRestService.service.BookService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 class BookControllerTest {
 	
 	@Autowired
@@ -21,6 +29,9 @@ class BookControllerTest {
 	
 	@Autowired
 	BookController controller;
+	
+	@Autowired
+	private MockMvc mockmvc;
 	
 	@MockBean
 	BookRepository repository;
@@ -50,6 +61,7 @@ class BookControllerTest {
 		Book book = buildBook();
 		when(service.idBuilder(book.getIsbn(), book.getAisle())).thenReturn(book.getIsbn() + book.getAisle());
 		when(service.checkBookExists(book.getId())).thenReturn(false);
+		when(repository.save(any())).thenReturn(book);
 		
 		ResponseEntity<AddResponse> response = controller.addBook(buildBook());
 		
@@ -87,6 +99,27 @@ class BookControllerTest {
 		//Mocking dependencies
 		Book book = buildBook();
 		when(repository.findById(book.getId()).get()).thenReturn(book);
+		
+		assertEquals(true, true);
+	}
+	
+	//Tests using MockMvc
+	
+	@Test
+	public void addBookControllerTest() throws Exception {
+		//Mocking dependencies
+		Book book = buildBook();
+		when(service.idBuilder(book.getIsbn(), book.getAisle())).thenReturn(book.getIsbn() + book.getAisle());
+		when(service.checkBookExists(book.getId())).thenReturn(true);
+		when(repository.save(any())).thenReturn(book);
+		
+		//Converting the java object "book" to json
+		ObjectMapper mapper = new ObjectMapper();
+		String bookAsJson = mapper.writeValueAsString(book);
+		
+		//Mocking the service
+		this.mockmvc.perform(post("/addBook").contentType(MediaType.APPLICATION_JSON).content(bookAsJson)).andExpect(status().isAccepted());
+		
 	}
 
 }
