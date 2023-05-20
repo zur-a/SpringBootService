@@ -46,9 +46,8 @@ class BookControllerTest {
 	
 	@Test
 	public void addBookTest() {
-		Book book = buildBook();
-		
 		//Mocking dependencies
+		Book book = buildBook();
 		when(service.idBuilder(book.getIsbn(), book.getAisle())).thenReturn(book.getIsbn() + book.getAisle());
 		when(service.checkBookExists(book.getId())).thenReturn(false);
 		
@@ -58,16 +57,36 @@ class BookControllerTest {
 	}
 	
 	@Test
-	public void bookAlreadyAddedTest() {
-		Book book = buildBook();
-		
+	public void bookAlreadyAddedStatusTest() {
 		//Mocking dependencies
+		Book book = buildBook();
 		when(service.idBuilder(book.getIsbn(), book.getAisle())).thenReturn(book.getIsbn() + book.getAisle());
 		when(service.checkBookExists(book.getId())).thenReturn(true);
 		
 		ResponseEntity<AddResponse> response = controller.addBook(buildBook());
 		
 		assertEquals(response.getStatusCode(), HttpStatus.ACCEPTED);
+	}
+	
+	@Test
+	public void bookAlreadyAddedResponseTest() {
+		//Mocking dependencies
+		Book book = buildBook();
+		when(service.idBuilder(book.getIsbn(), book.getAisle())).thenReturn(book.getIsbn() + book.getAisle());
+		when(service.checkBookExists(book.getId())).thenReturn(true);
+		
+		ResponseEntity<AddResponse> response = controller.addBook(buildBook());
+		AddResponse ad = response.getBody();
+		
+		assertEquals(book.getId(), ad.getId());
+		assertEquals("Book is already represented in the database", ad.getMessage());
+	}
+	
+	@Test
+	public void getBookNotFoundTest() {
+		//Mocking dependencies
+		Book book = buildBook();
+		when(repository.findById(book.getId()).get()).thenReturn(book);
 	}
 
 }
