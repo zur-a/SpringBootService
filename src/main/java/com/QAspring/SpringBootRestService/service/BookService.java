@@ -21,4 +21,8 @@ public class BookService {
 		Optional<Book> book = repository.findById(id);
 		return book.isPresent() ? true : false;
 	}
+	
+	public Book getBookById(String id) {
+		return repository.findById(id).get();
+	}
 }

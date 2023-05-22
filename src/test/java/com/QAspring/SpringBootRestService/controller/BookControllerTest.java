@@ -1,12 +1,11 @@
 package com.QAspring.SpringBootRestService.controller;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+//import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -147,5 +146,17 @@ class BookControllerTest {
 			.andExpect(jsonPath("$.[1].id").value("978-85-7448-307-842"));
 	}
 	
-
+	@Test
+	public void getBookByTitleTest() throws Exception {
+		//Mocking dependencies
+		Book book = buildBook();
+		when(repository.findByTitle(any(), any())).thenReturn(book);
+		
+		//Mocking the service and validating the status and the title
+		this.mockmvc.perform(get("/getBook/title").queryParam("bookTitle", book.getTitle()))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.title").value("O divã ocidento-oriental"));		
+	}
+	
+	
 }
