@@ -1,11 +1,17 @@
 package com.QAspring.SpringBootRestService.controller;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,12 +124,28 @@ class BookControllerTest {
 		ObjectMapper mapper = new ObjectMapper();
 		String bookAsJson = mapper.writeValueAsString(book);
 		
-		//Mocking the service and validating the status and the id returned
+		//Mocking the service validating the status and the id returned
+			//To print the response in the console you should add .andDo(print()) before the .andExpect()
 		this.mockmvc.perform(post("/addBook").contentType(MediaType.APPLICATION_JSON).content(bookAsJson))
 			.andExpect(status().isAccepted())
 			.andExpect(jsonPath("$.id").value(book.getId()));
 	}
 	
+	@Test
+	public void getBookByAuthorTest() throws Exception {
+		//Mocking dependencies
+		List<Book> list = new ArrayList<Book>();
+		list.add(buildBook());
+		list.add(buildBook());
+		list.add(buildBook());
+		when(repository.findAllByAuthor(any(), any())).thenReturn(list);
+		
+		//Mocking the service and validating the status, the list size and the id of the second book added [1]
+		this.mockmvc.perform(get("/getBook/author").queryParam("authorName", "Goethe"))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.length()").value(3))
+			.andExpect(jsonPath("$.[1].id").value("978-85-7448-307-842"));
+	}
 	
 
 }
