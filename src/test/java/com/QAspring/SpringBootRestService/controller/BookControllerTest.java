@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -94,14 +95,14 @@ class BookControllerTest {
 		assertEquals("Book is already represented in the database", ad.getMessage());
 	}
 	
-	@Test
-	public void getBookNotFoundTest() {
+	//@Test
+	//public void getBookNotFoundTest() {
 		//Mocking dependencies
-		Book book = buildBook();
-		when(repository.findById(book.getId()).get()).thenReturn(book);
+		//Book book = buildBook();
+		//when(repository.findById(book.getId()).get()).thenReturn(book);
 		
-		assertEquals(true, true);
-	}
+		//assertEquals();
+	//}
 	
 	//Tests using MockMvc
 	
@@ -117,9 +118,12 @@ class BookControllerTest {
 		ObjectMapper mapper = new ObjectMapper();
 		String bookAsJson = mapper.writeValueAsString(book);
 		
-		//Mocking the service
-		this.mockmvc.perform(post("/addBook").contentType(MediaType.APPLICATION_JSON).content(bookAsJson)).andExpect(status().isAccepted());
-		
+		//Mocking the service and validating the status and the id returned
+		this.mockmvc.perform(post("/addBook").contentType(MediaType.APPLICATION_JSON).content(bookAsJson))
+			.andExpect(status().isAccepted())
+			.andExpect(jsonPath("$.id").value(book.getId()));
 	}
+	
+	
 
 }
