@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 //import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,6 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.QAspring.SpringBootRestService.repository.BookRepository;
 import com.QAspring.SpringBootRestService.service.BookService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -52,6 +56,16 @@ class BookControllerTest {
 		book.setIsbn("978-85-7448-307-8");
 		book.setAisle(42);
 		book.setId("978-85-7448-307-842");
+		return book;
+	}
+	
+	public Book updateBook() {
+		Book book = new Book();
+		book.setTitle("Doutrina das cores");
+		book.setAuthor("Goethe");
+		book.setIsbn("978-85-7492-372-7");
+		book.setAisle(42);
+		book.setId("978-85-7492-372-742");
 		return book;
 	}
 	
@@ -158,5 +172,19 @@ class BookControllerTest {
 			.andExpect(jsonPath("$.title").value("O divã ocidento-oriental"));		
 	}
 	
-	
+	@Test
+	public void updateBookTest() throws Exception {
+		//Mocking dependencies
+		Book book = buildBook();
+		when(service.getBookById(any())).thenReturn(buildBook());
+		
+		//Converting the java object "book" to json
+		ObjectMapper mapper = new ObjectMapper();
+		String bookAsJson = mapper.writeValueAsString(updateBook());
+		
+		//Mocking the service and validating the status and the content of the updated book
+		this.mockmvc.perform(put("/updateBook/"+book.getId()).contentType(MediaType.APPLICATION_JSON).content(bookAsJson))
+			.andExpect(status().isOk())
+			.andExpect(content().json("{\"id\":\"978-85-7448-307-842\",\"title\":\"Doutrina das cores\",\"isbn\":\"978-85-7448-307-8\",\"aisle\":42,\"author\":\"Goethe\"}"));
+	}
 }

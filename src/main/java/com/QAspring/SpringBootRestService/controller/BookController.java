@@ -101,7 +101,7 @@ public class BookController {
 	@PutMapping("/updateBook/{id}")
 	public ResponseEntity<Book> bookUpdate(@PathVariable(value="id") String id, @RequestBody Book newData) {
 		//Finds the book to be updated
-		Book bookToBeUpdated = getBookById(id);
+		Book bookToBeUpdated = service.getBookById(id);
 		
 		//Setting the new values to the existing book
 		bookToBeUpdated.setAisle(newData.getAisle());
