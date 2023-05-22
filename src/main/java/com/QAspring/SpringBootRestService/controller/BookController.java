@@ -122,7 +122,7 @@ public class BookController {
 	public ResponseEntity<String> deleteBookById(@RequestBody Book book) {
 		try {
 			//Finding the book by id
-			Book bookToBeDeleted = repository.findById(book.getId()).get();
+			Book bookToBeDeleted = service.getBookById(book.getId());
 			
 			//Deleting the book from the database
 			repository.delete(bookToBeDeleted);

@@ -622,3 +622,61 @@ Identify and stop the process that's listening on port 8080 or configure this ap
 2023-05-22T17:45:55.096-03:00  INFO 20452 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-05-22T17:45:55.099-03:00  INFO 20452 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2023-05-22T17:45:55.105-03:00  INFO 20452 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-22T18:04:21.337-03:00  INFO 24696 --- [main] c.Q.S.controller.BookControllerTest      : Starting BookControllerTest using Java 17.0.6 with PID 24696 (started by juran in C:\Users\juran\Downloads\Arquivos compactados\SpringBootRestService\SpringBootRestService)
+2023-05-22T18:04:21.338-03:00  INFO 24696 --- [main] c.Q.S.controller.BookControllerTest      : No active profile set, falling back to 1 default profile: "default"
+2023-05-22T18:04:21.756-03:00  INFO 24696 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-22T18:04:21.805-03:00  INFO 24696 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 42 ms. Found 1 JPA repository interfaces.
+2023-05-22T18:04:22.487-03:00  INFO 24696 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-22T18:04:22.532-03:00  INFO 24696 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-22T18:04:22.700-03:00  INFO 24696 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-22T18:04:22.703-03:00  WARN 24696 --- [main] c.zaxxer.hikari.util.DriverDataSource    : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2023-05-22T18:04:23.002-03:00  INFO 24696 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@65259c53
+2023-05-22T18:04:23.004-03:00  INFO 24696 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-22T18:04:23.020-03:00  WARN 24696 --- [main] org.hibernate.dialect.Dialect            : HHH000511: The 5.0.0 version for [org.hibernate.dialect.MySQL5Dialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 5.7.0. Check the community dialects project for available legacy versions.
+2023-05-22T18:04:23.022-03:00  INFO 24696 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2023-05-22T18:04:23.024-03:00  WARN 24696 --- [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL5Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2023-05-22T18:04:23.450-03:00  INFO 24696 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-22T18:04:23.457-03:00  INFO 24696 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-22T18:04:23.566-03:00  WARN 24696 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-22T18:04:23.923-03:00  INFO 24696 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-05-22T18:04:23.923-03:00  INFO 24696 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-05-22T18:04:23.924-03:00  INFO 24696 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2023-05-22T18:04:23.981-03:00  INFO 24696 --- [main] c.Q.S.controller.BookControllerTest      : Started BookControllerTest in 2.85 seconds (process running for 3.891)
+2023-05-22T18:04:24.028-03:00  INFO 24696 --- [main] c.Q.S.controller.BookController          : Book already exists in the database
+2023-05-22T18:04:24.046-03:00  INFO 24696 --- [main] c.Q.S.controller.BookController          : Book already exists in the database
+2023-05-22T18:04:24.187-03:00  INFO 24696 --- [main] c.Q.S.controller.BookController          : Book updated in the database
+2023-05-22T18:04:24.249-03:00  INFO 24696 --- [main] c.Q.S.controller.BookController          : Book already exists in the database
+2023-05-22T18:04:24.258-03:00  INFO 24696 --- [main] c.Q.S.controller.BookController          : Book deleted from the database
+2023-05-22T18:04:24.282-03:00  INFO 24696 --- [main] c.Q.S.controller.BookController          : Creating a new book in the database
+2023-05-22T18:04:24.292-03:00  INFO 24696 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-22T18:04:24.294-03:00  INFO 24696 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-22T18:04:24.300-03:00  INFO 24696 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-22T18:05:00.949-03:00  INFO 25992 --- [main] c.Q.S.controller.BookControllerTest      : Starting BookControllerTest using Java 17.0.6 with PID 25992 (started by juran in C:\Users\juran\Downloads\Arquivos compactados\SpringBootRestService\SpringBootRestService)
+2023-05-22T18:05:00.951-03:00  INFO 25992 --- [main] c.Q.S.controller.BookControllerTest      : No active profile set, falling back to 1 default profile: "default"
+2023-05-22T18:05:01.378-03:00  INFO 25992 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-22T18:05:01.436-03:00  INFO 25992 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 1 JPA repository interfaces.
+2023-05-22T18:05:02.099-03:00  INFO 25992 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-22T18:05:02.144-03:00  INFO 25992 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-22T18:05:02.297-03:00  INFO 25992 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-22T18:05:02.301-03:00  WARN 25992 --- [main] c.zaxxer.hikari.util.DriverDataSource    : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2023-05-22T18:05:02.551-03:00  INFO 25992 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@26a33cf
+2023-05-22T18:05:02.553-03:00  INFO 25992 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-22T18:05:02.566-03:00  WARN 25992 --- [main] org.hibernate.dialect.Dialect            : HHH000511: The 5.0.0 version for [org.hibernate.dialect.MySQL5Dialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 5.7.0. Check the community dialects project for available legacy versions.
+2023-05-22T18:05:02.568-03:00  INFO 25992 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2023-05-22T18:05:02.570-03:00  WARN 25992 --- [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL5Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2023-05-22T18:05:02.986-03:00  INFO 25992 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-22T18:05:02.992-03:00  INFO 25992 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-22T18:05:03.105-03:00  WARN 25992 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-22T18:05:03.537-03:00  INFO 25992 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-05-22T18:05:03.537-03:00  INFO 25992 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-05-22T18:05:03.539-03:00  INFO 25992 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2023-05-22T18:05:03.573-03:00  INFO 25992 --- [main] c.Q.S.controller.BookControllerTest      : Started BookControllerTest in 2.852 seconds (process running for 3.602)
+2023-05-22T18:05:03.649-03:00  INFO 25992 --- [main] c.Q.S.controller.BookController          : Book already exists in the database
+2023-05-22T18:05:03.674-03:00  INFO 25992 --- [main] c.Q.S.controller.BookController          : Book already exists in the database
+2023-05-22T18:05:03.859-03:00  INFO 25992 --- [main] c.Q.S.controller.BookController          : Book updated in the database
+2023-05-22T18:05:03.929-03:00  INFO 25992 --- [main] c.Q.S.controller.BookController          : Book already exists in the database
+2023-05-22T18:05:03.938-03:00  INFO 25992 --- [main] c.Q.S.controller.BookController          : Book deleted from the database
+2023-05-22T18:05:03.956-03:00  INFO 25992 --- [main] c.Q.S.controller.BookController          : Creating a new book in the database
+2023-05-22T18:05:03.967-03:00  INFO 25992 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-22T18:05:03.970-03:00  INFO 25992 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-22T18:05:03.975-03:00  INFO 25992 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

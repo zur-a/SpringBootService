@@ -2,7 +2,9 @@ package com.QAspring.SpringBootRestService.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -186,5 +188,17 @@ class BookControllerTest {
 		this.mockmvc.perform(put("/updateBook/"+book.getId()).contentType(MediaType.APPLICATION_JSON).content(bookAsJson))
 			.andExpect(status().isOk())
 			.andExpect(content().json("{\"id\":\"978-85-7448-307-842\",\"title\":\"Doutrina das cores\",\"isbn\":\"978-85-7448-307-8\",\"aisle\":42,\"author\":\"Goethe\"}"));
+	}
+	
+	@Test
+	public void deleteBookTest() throws Exception {
+		//Mocking dependencies
+		when(service.getBookById(any())).thenReturn(buildBook());
+		doNothing().when(repository).delete(buildBook());
+		
+		//Mocking the service and validating the status and the message from the response
+		this.mockmvc.perform(delete("/deleteBook").contentType(MediaType.APPLICATION_JSON).content("{\"id\" : \"978-85-7448-307-842\"}"))
+				.andExpect(status().isCreated())
+				.andExpect(content().string("The book has been deleted"));
 	}
 }
