@@ -81,7 +81,7 @@ public class BookController {
 	@GetMapping("/getBook/{id}")
 	public Book getBookById(@PathVariable(value="id") String id) {
 		try {
-			Book book = repository.findById(id).get();
+			Book book = service.getBookById(id);
 			return book;
 		} catch(Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);

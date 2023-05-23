@@ -8,9 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-//import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,7 +27,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.QAspring.SpringBootRestService.repository.BookRepository;
 import com.QAspring.SpringBootRestService.service.BookService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -144,6 +141,19 @@ class BookControllerTest {
 		this.mockmvc.perform(post("/addBook").contentType(MediaType.APPLICATION_JSON).content(bookAsJson))
 			.andExpect(status().isAccepted())
 			.andExpect(jsonPath("$.id").value(book.getId()));
+	}
+	
+	@Test
+	public void getBookByIdTest() throws Exception{
+		//Mocking dependencies
+		Book book = buildBook();
+		when(service.getBookById(any())).thenReturn(book);
+		
+		//Mocking the service
+		this.mockmvc.perform(get("/getBook/"+book.getId()))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.id").value("978-85-7448-307-842"))
+			.andExpect(jsonPath("$.title").value("O divã ocidento-oriental"));
 	}
 	
 	@Test
